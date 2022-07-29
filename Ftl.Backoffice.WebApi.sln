@@ -5,9 +5,13 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ftl.Backoffice.Presentation", "Ftl.Backoffice.Presentation\Ftl.Backoffice.Presentation.csproj", "{39B92BC7-33DF-4A97-ACD6-0204748752B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ftl.Backoffice.Application", "Ftl.Backoffice.Application\Ftl.Backoffice.Application.csproj", "{657F40DA-D4D6-420B-A169-39A8FAC55427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ftl.Backoffice.Application", "Ftl.Backoffice.Application\Ftl.Backoffice.Application.csproj", "{657F40DA-D4D6-420B-A169-39A8FAC55427}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ftl.Backoffice.Data", "Ftl.Backoffice.Data\Ftl.Backoffice.Data.csproj", "{77AC61CF-6334-4F28-8573-F76B11CF7F97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ftl.Backoffice.Core", "Ftl.Backoffice.Data\Ftl.Backoffice.Core.csproj", "{77AC61CF-6334-4F28-8573-F76B11CF7F97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ftl.Backoffice.DataAccess", "Ftl.Backoffice.DataAccess\Ftl.Backoffice.DataAccess.csproj", "{7E050B67-6037-4A23-A412-E144E8F21641}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ftl.Backoffice.Shared", "Ftl.Backoffice.Shared\Ftl.Backoffice.Shared.csproj", "{F35BDD5F-27AB-4E1B-8707-9CD5B4181F37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{77AC61CF-6334-4F28-8573-F76B11CF7F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77AC61CF-6334-4F28-8573-F76B11CF7F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77AC61CF-6334-4F28-8573-F76B11CF7F97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E050B67-6037-4A23-A412-E144E8F21641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E050B67-6037-4A23-A412-E144E8F21641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E050B67-6037-4A23-A412-E144E8F21641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E050B67-6037-4A23-A412-E144E8F21641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F35BDD5F-27AB-4E1B-8707-9CD5B4181F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F35BDD5F-27AB-4E1B-8707-9CD5B4181F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F35BDD5F-27AB-4E1B-8707-9CD5B4181F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F35BDD5F-27AB-4E1B-8707-9CD5B4181F37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

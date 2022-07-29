@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ftl.Backoffice.DataAccess\Ftl.Backoffice.DataAccess.csproj" />
+    <ProjectReference Include="..\Ftl.Backoffice.Data\Ftl.Backoffice.Core.csproj" />
+    <ProjectReference Include="..\Ftl.Backoffice.Shared\Ftl.Backoffice.Shared.csproj" />
   </ItemGroup>
 
 </Project>

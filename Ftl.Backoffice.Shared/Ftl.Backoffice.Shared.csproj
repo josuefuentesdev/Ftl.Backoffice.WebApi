@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Ftl.Backoffice.DataAccess\Ftl.Backoffice.DataAccess.csproj" />
-  </ItemGroup>
-
 </Project>
