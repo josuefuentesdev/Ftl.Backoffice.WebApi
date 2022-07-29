@@ -1,8 +1,9 @@
+using Ftl.Backoffice.API;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 
-namespace Ftl.Backoffice.Presentation.Controllers
+namespace Ftl.Backoffice.API.Controllers
 {
     [Authorize]
     [ApiController]

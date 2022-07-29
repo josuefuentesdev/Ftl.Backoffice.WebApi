@@ -1,5 +1,5 @@
-﻿using Ftl.Backoffice.Data.Common;
-using Ftl.Backoffice.Data.Entities;
+﻿using Ftl.Backoffice.Core.Common;
+using Ftl.Backoffice.Core.Entities;
 using Ftl.Backoffice.Shared.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,8 +13,8 @@ namespace Ftl.Backoffice.DataAccess.Persistance
             _currentUserService = currentUserService;
         }
 
-        public DbSet<Contact> Contacts { get; set; }
-        public DbSet<ContactEvent> ContactEvents { get; set; }
+        public DbSet<ContactItem> Contacts { get; set; }
+        public DbSet<ContactEventItem> ContactEvents { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

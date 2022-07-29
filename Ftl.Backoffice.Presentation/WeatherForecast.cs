@@ -1,4 +1,4 @@
-namespace Ftl.Backoffice.Presentation
+namespace Ftl.Backoffice.API
 {
     public class WeatherForecast
     {

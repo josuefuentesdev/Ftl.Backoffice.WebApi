@@ -1,8 +1,15 @@
+using Ftl.Backoffice.API;
+using Ftl.Backoffice.Application;
+using Ftl.Backoffice.DataAccess;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplicationServices();
+builder.Services.AddDataAccessServices(builder.Configuration);
+builder.Services.AddApiServices();
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
