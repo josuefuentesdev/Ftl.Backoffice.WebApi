@@ -1,7 +1,7 @@
+using FluentValidation.AspNetCore;
 using Ftl.Backoffice.API;
 using Ftl.Backoffice.Application;
 using Ftl.Backoffice.DataAccess;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 
@@ -15,7 +15,8 @@ builder.Services.AddApiServices();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
