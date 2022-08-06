@@ -12,7 +12,6 @@ namespace Ftl.Backoffice.Application.Contact.Validators
     {
         public CreateContactDtoValidator()
         {
-            RuleFor(x => x.Name).NotEmpty();
             RuleFor(x => x.Email).EmailAddress();
         }
     }
