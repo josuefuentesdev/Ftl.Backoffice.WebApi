@@ -18,7 +18,7 @@ namespace Ftl.Backoffice.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public async Task<ActionResult> GetContacts()
         {
             var result = await _contactService.GetAsync();
             return result == null ?
@@ -27,7 +27,7 @@ namespace Ftl.Backoffice.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetOne(int id)
+        public async Task<ActionResult> GetContactById(int id)
         {
             var result = await _contactService.GetOneAsync(id);
             return result == null ?
@@ -36,15 +36,15 @@ namespace Ftl.Backoffice.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(CreateContactDto createContactDto)
+        public async Task<ActionResult<int>> CreateContact(CreateContactDto createContactDto)
         {
             var result = await _contactService.CreateAsync(createContactDto);
-
-            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
+            
+            return CreatedAtAction(nameof(GetContactById), new { id = result.Id }, result.Id);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, UpdateContactDto update)
+        public async Task<ActionResult> UpdateContact(int id, UpdateContactDto update)
         {
             var result = await _contactService.UpdateAsync(id, update);
 
@@ -54,7 +54,7 @@ namespace Ftl.Backoffice.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> DeleteContact(int id)
         {
             var result = await _contactService.DeleteAsync(id);
 
