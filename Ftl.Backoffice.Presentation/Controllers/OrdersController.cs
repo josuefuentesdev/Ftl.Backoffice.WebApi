@@ -1,6 +1,5 @@
-﻿using Ftl.Backoffice.Application.Contact;
-using Ftl.Backoffice.Application.Contact.Dtos;
-using Ftl.Backoffice.Core.Entities;
+﻿using Ftl.Backoffice.Application.Order;
+using Ftl.Backoffice.Application.Order.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,20 +8,20 @@ namespace Ftl.Backoffice.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactsController : ControllerBase
+    public class OrdersController : ControllerBase
     {
-        private readonly IContactService _contactService;
+        private readonly IOrderService _contactService;
 
-        public ContactsController(IContactService contactService)
+        public OrdersController(IOrderService contactService)
         {
             _contactService = contactService;
         }
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<ContactItem>> GetContacts()
+        public async Task<ActionResult> GetOrders(string? executionId)
         {
-            var result = await _contactService.GetAsync();
+            var result = await _contactService.GetAsync(executionId);
             return result == null ?
                 NotFound() :
                 Ok(result);
@@ -30,7 +29,7 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<ContactItem>> GetContactById(int id)
+        public async Task<ActionResult> GetOrderById(int id)
         {
             var result = await _contactService.GetOneAsync(id);
             return result == null ?
@@ -40,16 +39,16 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(201)]
-        public async Task<ActionResult<int>> CreateContact(CreateContactDto createContactDto)
+        public async Task<ActionResult<int>> CreateOrder(CreateOrderDto createOrderDto)
         {
-            var result = await _contactService.CreateAsync(createContactDto);
+            var result = await _contactService.CreateAsync(createOrderDto);
             
-            return CreatedAtAction(nameof(GetContactById), new { id = result.Id }, result.Id);
+            return CreatedAtAction(nameof(GetOrderById), new { id = result.Id }, result.Id);
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
-        public async Task<ActionResult> UpdateContact(int id, UpdateContactDto update)
+        public async Task<ActionResult> UpdateOrder(int id, UpdateOrderDto update)
         {
             var result = await _contactService.UpdateAsync(id, update);
 
@@ -60,14 +59,13 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
-        public async Task<ActionResult> DeleteContact(int id)
+        public async Task<ActionResult> DeleteOrder(int id)
         {
             var result = await _contactService.DeleteAsync(id);
 
             return result == null ?
                 NotFound() :
                 NoContent();
-                
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Ftl.Backoffice.DataAccess.Persistance
         }
 
         public DbSet<ContactItem> Contacts { get; set; }
+        public DbSet<OrderItem> Orders { get; set; }
         public DbSet<ContactEventItem> ContactEvents { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
