@@ -23,7 +23,7 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<ContactEventItem>> GetContactEvents()
+        public async Task<ActionResult<IList<ContactEventItem>>> GetContactEvents()
         {
             var result = await _contactService.GetAsync();
             return result == null ?

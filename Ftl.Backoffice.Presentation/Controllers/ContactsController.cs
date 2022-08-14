@@ -20,7 +20,7 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<ContactItem>> GetContacts()
+        public async Task<ActionResult<IList<ContactItem>>> GetContacts()
         {
             var result = await _contactService.GetAsync();
             return result == null ?

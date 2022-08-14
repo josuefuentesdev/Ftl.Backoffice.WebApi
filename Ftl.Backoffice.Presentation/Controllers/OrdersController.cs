@@ -1,5 +1,6 @@
 ﻿using Ftl.Backoffice.Application.Order;
 using Ftl.Backoffice.Application.Order.Dtos;
+using Ftl.Backoffice.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,7 +20,7 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<ActionResult> GetOrders(string? executionId)
+        public async Task<ActionResult<IList<OrderItem>>> GetOrders(string? executionId)
         {
             var result = await _contactService.GetAsync(executionId);
             return result == null ?
