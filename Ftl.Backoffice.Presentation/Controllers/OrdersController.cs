@@ -38,7 +38,7 @@ namespace Ftl.Backoffice.API.Controllers
                 Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateOrder")]
         [ProducesResponseType(201)]
         public async Task<ActionResult<int>> CreateOrder(CreateOrderDto createOrderDto)
         {
@@ -67,6 +67,16 @@ namespace Ftl.Backoffice.API.Controllers
             return result == null ?
                 NotFound() :
                 NoContent();
+        }
+
+        [HttpGet("GetOrdersStats")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<OrdersStatsDto>> GetOrdersStats([FromQuery] FilterOrderDto filters)
+        {
+            var result = await _contactService.GetOrdersStatsAsync(filters);
+            return result == null ?
+                NotFound() :
+                Ok(result);
         }
     }
 }

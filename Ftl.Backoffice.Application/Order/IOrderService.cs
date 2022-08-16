@@ -15,5 +15,6 @@ namespace Ftl.Backoffice.Application.Order
         public Task<OrderItem> CreateAsync(CreateOrderDto createOrderDto, CancellationToken cancellationToken = default);
         public Task<OrderItem?> UpdateAsync(int id, UpdateOrderDto createOrderDto, CancellationToken cancellationToken = default);
         public Task<OrderItem?> DeleteAsync(int id, CancellationToken cancellationToken = default);
+        public Task<OrdersStatsDto> GetOrdersStatsAsync(FilterOrderDto? filters, CancellationToken cancellationToken = default);
     }
 }

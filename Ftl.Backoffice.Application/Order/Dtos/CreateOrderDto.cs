@@ -11,5 +11,6 @@ namespace Ftl.Backoffice.Application.Order.Dtos
         public int ContactId { get; set; }
         public string? ExecutionId { get; set; }
         public string Status { get; set; }
+        public Decimal? NetPrice { get; set; }
     }
 }

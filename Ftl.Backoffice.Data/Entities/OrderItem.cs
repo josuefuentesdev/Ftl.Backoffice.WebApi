@@ -14,5 +14,6 @@ namespace Ftl.Backoffice.Core.Entities
         public string ContactEmail { get; set; }
         public string? ExecutionId { get; set; }
         public string Status { get; set; }
+        public Decimal? NetPrice { get; set; }
     }
 }

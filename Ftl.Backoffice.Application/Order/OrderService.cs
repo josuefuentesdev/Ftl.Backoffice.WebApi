@@ -34,7 +34,31 @@ namespace Ftl.Backoffice.Application.Order
             return await orders
                 .ToListAsync();
         }
-        
+
+        public async Task<OrdersStatsDto> GetOrdersStatsAsync(FilterOrderDto? filters, CancellationToken cancellationToken = default)
+        {
+            var orders = _context.Orders.AsQueryable();
+
+            if (filters != null && filters != new FilterOrderDto())
+            {
+                orders = orders.Where(x => x.Created >= filters.StartAt && x.Created <= filters.EndAt);
+            }
+
+            var stats = orders
+                .GroupBy(o => 1)
+                .Select(g => new OrdersStatsDto
+                {
+                    Count = g.Count(),
+                    Revenue = g.Sum(x => x.NetPrice),
+                    LastOrder = g.Max(x => x.Created)
+                });
+
+            var result = await stats.FirstOrDefaultAsync();
+
+
+            return result;
+        }
+
         public async Task<OrderItem?> GetOneAsync(int id, CancellationToken cancellationToken = default)
         {
             return await _context.Orders

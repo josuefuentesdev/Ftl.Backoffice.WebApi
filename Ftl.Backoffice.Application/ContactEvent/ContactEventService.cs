@@ -34,6 +34,20 @@ namespace Ftl.Backoffice.Application.ContactEvent
                 .FindAsync(new object[] { id }, cancellationToken);
         }
 
+        public async Task<IList<ContactEventItem>> GetStageCountAsync(filterContactEventsDto filter, CancellationToken cancellationToken = default)
+        {
+            if (filter != null)
+            {
+                return await _context.ContactEvents
+                    .Where(x => x.Created >= filter.MinDate && x.Created <= filter.MaxDate)
+                    // TODO
+                    .ToListAsync();
+            }
+
+            return await _context.ContactEvents
+                .ToListAsync();
+        }
+
         public async Task<ContactEventItem> CreateAsync(CreateContactEventDto createContactDto, CancellationToken cancellationToken = default)
         {
             var entity = _mapper.Map<ContactEventItem>(createContactDto);

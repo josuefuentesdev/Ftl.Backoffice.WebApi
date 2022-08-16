@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ftl.Backoffice.Application.Order.Dtos
 {
-    public class UpdateOrderDto
+    public class OrdersStatsDto
     {
-        public int ContactId { get; set; }
-        public string Status { get; set; }
-        public Decimal? NetPrice { get; set; }
+        public int Count { get; set; }
+        public Decimal? Revenue { get; set; }
+        public DateTimeOffset LastOrder { get; set; }
     }
 }

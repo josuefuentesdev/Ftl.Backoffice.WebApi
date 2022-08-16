@@ -25,11 +25,11 @@ namespace Ftl.Backoffice.DataAccess.Persistance
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedBy = _currentUserService.UserId;
-                        entry.Entity.Created = DateTime.Now;
+                        entry.Entity.Created = DateTimeOffset.Now;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedBy = _currentUserService.UserId;
-                        entry.Entity.LastModified = DateTime.Now;
+                        entry.Entity.LastModified = DateTimeOffset.Now;
                         break;
                 }
             }
