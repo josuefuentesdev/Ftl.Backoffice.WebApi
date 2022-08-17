@@ -1,5 +1,6 @@
 ﻿using Ftl.Backoffice.Application.Contact;
 using Ftl.Backoffice.Application.Contact.Dtos;
+using Ftl.Backoffice.Application.Order.Dtos;
 using Ftl.Backoffice.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,9 +21,9 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<IList<ContactItem>>> GetContacts()
+        public async Task<ActionResult<IList<GetContactsResponseDto>>> GetContacts([FromQuery] FilterContactDto filters)
         {
-            var result = await _contactService.GetAsync();
+            var result = await _contactService.GetAsync(filters);
             return result == null ?
                 NotFound() :
                 Ok(result);
@@ -30,7 +31,7 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<ContactItem>> GetContactById(int id)
+        public async Task<ActionResult<GetOneContactResponseDto>> GetContactById(int id)
         {
             var result = await _contactService.GetOneAsync(id);
             return result == null ?

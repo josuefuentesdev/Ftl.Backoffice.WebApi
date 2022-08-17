@@ -15,6 +15,8 @@ namespace Ftl.Backoffice.Application.Contact.Profiles
         {
             CreateMap<CreateContactDto, ContactItem>();
             CreateMap<UpdateContactDto, ContactItem>();
+            CreateMap<ContactItem, GetContactsResponseDto>();
+            CreateMap<ContactItem, GetOneContactResponseDto>();
         }
     }
 }
