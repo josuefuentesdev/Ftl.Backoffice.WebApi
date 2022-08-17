@@ -23,9 +23,9 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<IList<ContactEventItem>>> GetContactEvents()
+        public async Task<ActionResult<IList<ContactEventItem>>> GetContactEvents([FromQuery] int? contactId)
         {
-            var result = await _contactService.GetAsync();
+            var result = await _contactService.GetAsync(contactId);
             return result == null ?
                 NotFound() :
                 Ok(result);

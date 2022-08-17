@@ -22,10 +22,15 @@ namespace Ftl.Backoffice.Application.ContactEvent
             _mapper = mapper;
         }
 
-        public async Task<IList<ContactEventItem>> GetAsync(CancellationToken cancellationToken = default)
+        public async Task<IList<ContactEventItem>> GetAsync(int? contactId, CancellationToken cancellationToken = default)
         {
-            return await _context.ContactEvents
-                .ToListAsync();
+            var contacts = _context.ContactEvents.AsQueryable();
+
+            if (contactId != null)
+            {
+                contacts = contacts.Where(c => c.ContactId == contactId);
+            }
+            return await contacts.OrderByDescending(c => c.Created).ToListAsync();
         }
 
         public async Task<ContactEventItem?> GetOneAsync(Guid id, CancellationToken cancellationToken = default)
