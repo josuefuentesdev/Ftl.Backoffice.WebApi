@@ -17,7 +17,7 @@ namespace Ftl.Backoffice.DataAccess
             else
             {
                 services.AddDbContext<FtlDbContext>(options =>
-                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Environment.GetEnvironmentVariable("FictitelDB")));
             }
             return services;
         }

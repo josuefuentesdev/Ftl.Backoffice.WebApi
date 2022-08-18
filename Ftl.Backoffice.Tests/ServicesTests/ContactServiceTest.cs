@@ -29,7 +29,7 @@ namespace Ftl.Backoffice.Tests.ServicesTests
         [Fact]
         public async Task GetAsync_ShouldReturnListOfContactItems()
         {
-            var result = await _contactService.GetAsync();
+            var result = await _contactService.GetAsync(null);
             Assert.NotNull(result);
             Assert.True(result.Count > 0);
         }

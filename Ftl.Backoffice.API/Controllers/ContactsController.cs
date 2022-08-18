@@ -1,31 +1,28 @@
-﻿using Ftl.Backoffice.Application.ContactEvent;
-using Ftl.Backoffice.Application.ContactEvent.Dtos;
+﻿using Ftl.Backoffice.Application.Contact;
+using Ftl.Backoffice.Application.Contact.Dtos;
+using Ftl.Backoffice.Application.Order.Dtos;
 using Ftl.Backoffice.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Ftl.Backoffice.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactEventsController : ControllerBase
+    public class ContactsController : ControllerBase
     {
-        private readonly IContactEventService _contactService;
+        private readonly IContactService _contactService;
 
-        public ContactEventsController(IContactEventService contactService)
+        public ContactsController(IContactService contactService)
         {
             _contactService = contactService;
         }
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<IList<ContactEventItem>>> GetContactEvents([FromQuery] int? contactId)
+        public async Task<ActionResult<IList<GetContactsResponseDto>>> GetContacts([FromQuery] FilterContactDto filters)
         {
-            var result = await _contactService.GetAsync(contactId);
+            var result = await _contactService.GetAsync(filters);
             return result == null ?
                 NotFound() :
                 Ok(result);
@@ -33,7 +30,7 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<ContactEventItem>> GetContactEventById(Guid id)
+        public async Task<ActionResult<GetOneContactResponseDto>> GetContactById(int id)
         {
             var result = await _contactService.GetOneAsync(id);
             return result == null ?
@@ -43,16 +40,16 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(201)]
-        public async Task<ActionResult<Guid>> CreateContactEvent(CreateContactEventDto ContactEventDto)
+        public async Task<ActionResult<int>> CreateContact(CreateContactDto createContactDto)
         {
-            var result = await _contactService.CreateAsync(ContactEventDto);
-
-            return CreatedAtAction(nameof(GetContactEventById), new { id = result.Id }, result.Id);
+            var result = await _contactService.CreateAsync(createContactDto);
+            
+            return CreatedAtAction(nameof(GetContactById), new { id = result.Id }, result.Id);
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
-        public async Task<ActionResult> UpdateContactEvent(Guid id, UpdateContactEventDto update)
+        public async Task<ActionResult> UpdateContact(int id, UpdateContactDto update)
         {
             var result = await _contactService.UpdateAsync(id, update);
 
@@ -63,13 +60,14 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
-        public async Task<ActionResult> DeleteContactEvent(Guid id)
+        public async Task<ActionResult> DeleteContact(int id)
         {
             var result = await _contactService.DeleteAsync(id);
 
             return result == null ?
                 NotFound() :
                 NoContent();
+                
         }
     }
 }

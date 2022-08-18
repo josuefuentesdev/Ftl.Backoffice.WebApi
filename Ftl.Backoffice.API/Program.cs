@@ -1,22 +1,28 @@
+using Azure.Identity;
 using FluentValidation.AspNetCore;
 using Ftl.Backoffice.API;
 using Ftl.Backoffice.Application;
 using Ftl.Backoffice.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Web;
 using Serilog;
+using System.Configuration;
+
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var builder = WebApplication.CreateBuilder(args);
 
 //create the logger and setup your sinks, filters and properties
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
+.WriteTo.Console()
+    .WriteTo.AzureTableStorage(Environment.GetEnvironmentVariable("LogsStorageConnectionString"))
     .CreateBootstrapLogger();
 
 Log.Information("Starting up");
 
 try
 {
-    var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-    var builder = WebApplication.CreateBuilder(args);
     builder.Host.UseSerilog();
     var origins = builder.Configuration.GetValue<string>("CorsOrigins").Split(";");
 

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ftl.Backoffice.API", "Ftl.Backoffice.Presentation\Ftl.Backoffice.API.csproj", "{39B92BC7-33DF-4A97-ACD6-0204748752B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ftl.Backoffice.API", "Ftl.Backoffice.API\Ftl.Backoffice.API.csproj", "{39B92BC7-33DF-4A97-ACD6-0204748752B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ftl.Backoffice.Application", "Ftl.Backoffice.Application\Ftl.Backoffice.Application.csproj", "{657F40DA-D4D6-420B-A169-39A8FAC55427}"
 EndProject
