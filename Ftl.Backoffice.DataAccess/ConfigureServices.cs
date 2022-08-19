@@ -16,8 +16,16 @@ namespace Ftl.Backoffice.DataAccess
             }
             else
             {
-                services.AddDbContext<FtlDbContext>(options =>
-                    options.UseSqlServer(Environment.GetEnvironmentVariable("FictitelDB")));
+                var prodConnection = Environment.GetEnvironmentVariable("fictiteldb");
+                if (prodConnection != null)
+                {
+                    services.AddDbContext<FtlDbContext>(options =>
+                        options.UseSqlServer(prodConnection));
+                } else
+                {
+                    services.AddDbContext<FtlDbContext>(options =>
+                        options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                }
             }
             return services;
         }

@@ -6,7 +6,7 @@
     "mssql1": {
       "secretStore": "LocalSecretsFile",
       "type": "mssql.onprem",
-      "connectionId": "FictitelDB"
+      "connectionId": "fictiteldb"
     }
   }
 }

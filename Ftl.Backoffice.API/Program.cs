@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 //create the logger and setup your sinks, filters and properties
 Log.Logger = new LoggerConfiguration()
 .WriteTo.Console()
-    .WriteTo.AzureTableStorage(Environment.GetEnvironmentVariable("LogsStorageConnectionString"))
+    .WriteTo.AzureTableStorage(builder.Configuration.GetValue<string>("logconnection") ?? Environment.GetEnvironmentVariable("LogsStorageConnectionString"))
     .CreateBootstrapLogger();
 
 Log.Information("Starting up");
