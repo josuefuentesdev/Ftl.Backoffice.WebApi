@@ -1,21 +1,17 @@
-using Azure.Identity;
 using FluentValidation.AspNetCore;
 using Ftl.Backoffice.API;
 using Ftl.Backoffice.Application;
 using Ftl.Backoffice.DataAccess;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Identity.Web;
 using Serilog;
-using System.Configuration;
-
+using Serilog.Events;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 //create the logger and setup your sinks, filters and properties
 Log.Logger = new LoggerConfiguration()
-.WriteTo.Console()
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .WriteTo.Console()
     .WriteTo.AzureTableStorage(builder.Configuration.GetValue<string>("logconnection") ?? Environment.GetEnvironmentVariable("LogsStorageConnectionString"))
     .CreateBootstrapLogger();
 
@@ -41,10 +37,6 @@ try
     builder.Services.AddDataAccessServices(builder.Configuration);
     builder.Services.AddApiServices();
 
-    // Add services to the container.
-    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
     builder.Services.AddControllers()
         .AddFluentValidation();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -63,11 +55,12 @@ try
     }
 
     //app.UseHttpsRedirection();
+    app.UseSerilogRequestLogging();
 
     app.UseCors(MyAllowSpecificOrigins);
     
-    app.UseAuthentication();
-    app.UseAuthorization();
+    //app.UseAuthentication();
+    //app.UseAuthorization();
 
     app.MapControllers();
 
