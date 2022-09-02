@@ -12,10 +12,12 @@ namespace Ftl.Backoffice.API.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly IContactService _contactService;
+        private string _tokenSecret;
 
         public ContactsController(IContactService contactService)
         {
             _contactService = contactService;
+            _tokenSecret = Environment.GetEnvironmentVariable("contacttoken");
         }
 
         [HttpGet]
@@ -30,9 +32,16 @@ namespace Ftl.Backoffice.API.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<GetOneContactResponseDto>> GetContactById(int id)
+        public async Task<ActionResult<GetOneContactResponseDto>> GetContactById(int id, [FromQuery] string? token)
         {
-            var result = await _contactService.GetOneAsync(id);
+            GetOneContactResponseDto result;
+            if (_tokenSecret != null && token == _tokenSecret)
+            {
+                result = await _contactService.GetOneAsync(id, false);
+            } else
+            {
+                result = await _contactService.GetOneAsync(id);
+            }
             return result == null ?
                 NotFound() :
                 Ok(result);

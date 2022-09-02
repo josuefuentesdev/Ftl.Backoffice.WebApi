@@ -4,6 +4,7 @@ using Ftl.Backoffice.Application.Order.Dtos;
 using Ftl.Backoffice.Core.Entities;
 using Ftl.Backoffice.DataAccess.Persistance;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace Ftl.Backoffice.Application.Contact
 {
@@ -31,12 +32,19 @@ namespace Ftl.Backoffice.Application.Contact
             return contactList;
         }
         
-        public async Task<GetOneContactResponseDto?> GetOneAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<GetOneContactResponseDto?> GetOneAsync(int id, bool obfuscate = true, CancellationToken cancellationToken = default)
         {
             var contact = await _context.Contacts
                 .FindAsync(new object[] { id }, cancellationToken);
 
             var contactDto = _mapper.Map<GetOneContactResponseDto>(contact);
+
+            // obfuscate
+            if (obfuscate)
+            {
+                Regex regex = new Regex("[a-zA-Z0-9]");
+                if (contactDto.Email != null) contactDto.Email = regex.Replace(contactDto.Email, "*");
+            }
 
             return contactDto;
         }
