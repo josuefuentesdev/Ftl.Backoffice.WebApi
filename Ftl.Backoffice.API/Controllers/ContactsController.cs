@@ -14,10 +14,10 @@ namespace Ftl.Backoffice.API.Controllers
         private readonly IContactService _contactService;
         private string _tokenSecret;
 
-        public ContactsController(IContactService contactService)
+        public ContactsController(IContactService contactService, IConfiguration configuration)
         {
             _contactService = contactService;
-            _tokenSecret = Environment.GetEnvironmentVariable("contacttoken");
+            _tokenSecret = configuration.GetValue<string>("contacttoken");
         }
 
         [HttpGet]
